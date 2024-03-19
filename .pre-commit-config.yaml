@@ -4,10 +4,10 @@ repos:
   - id: trailing-whitespace
     name: trailing-whitespace
     entry: files should not have trailing whitespace
-    language: python
+    language: system
     files: '.*\.py$'
   - id: end-of-file-fixer
     name: end-of-file-fixer
     entry: files should have a single newline at the end
-    language: python
+    language: system
     files: '.*\.py$'
