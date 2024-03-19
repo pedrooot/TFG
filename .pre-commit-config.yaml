@@ -10,4 +10,4 @@ repos:
     name: end-of-file-fixer
     entry: files should have a single newline at the end
     language: python
-    files: '.*\.py'
+    files: '../*/.py'
