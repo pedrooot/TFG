@@ -1,0 +1,6 @@
+telegram_token: "your_telegram_bot_token"
+telegram_chat_id: "your_telegram_chat_id"
+
+# Credentials for librelink
+librelink_username: "your_librelink_username"
+librelink_password: "your_librelink_password"
