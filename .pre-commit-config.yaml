@@ -11,3 +11,8 @@ repos:
     entry: files should have a single newline at the end
     language: system
     files: '.*\.py'
+  - id: test
+    name: test
+    entry: run tests
+    language: system
+    files: '.*\.py'
