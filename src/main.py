@@ -1,6 +1,6 @@
 import requests
 import schedule
-from glucose import glucose_value
+from src.glucose import glucose_value
 from utils.additional_funcions import load_config
 
 def bot_send_text(bot_token, bot_chatID, bot_message):
@@ -23,7 +23,7 @@ def report():
     if actual_glucose < 70 and previous_glucose < 70:
         glucose_result = f'Current:{actual_glucose}, STILL LOW'
     if actual_glucose > 70 and actual_glucose < 180:
-        glucose_result = f'Current: {actual_glucose}, FUCK YEAH'
+        glucose_result = f'Current: {actual_glucose}, YEAH'
 
     #Glucose results add info if previous glucose is by 20 units higher or lower
     if actual_glucose - previous_glucose > 20:
