@@ -1,18 +1,8 @@
 repos:
 - repo: local
   hooks:
-  - id: trailing-whitespace
-    name: trailing-whitespace
-    entry: files should not have trailing whitespace
-    language: system
-    files: '.*\.py'
-  - id: end-of-file-fixer
-    name: end-of-file-fixer
-    entry: files should have a single newline at the end
-    language: system
-    files: '.*\.py'
   - id: test
     name: test
-    entry: run tests
+    entry: pytest
     language: system
-    files: '.*\.py'
+    files: 'tests/*'
