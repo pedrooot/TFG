@@ -2,6 +2,8 @@ import requests
 import schedule
 from src.glucose import glucose_value
 from utils.additional_funcions import load_config
+from lib.cli.parser import GlucoseBotArgumentParser
+import requests
 
 def bot_send_text(bot_token, bot_chatID, bot_message):
     
@@ -34,10 +36,15 @@ def report():
     config = load_config('config.yaml')
     bot_send_text(config['telegram_token'], config['telegram_chat_id'], glucose_result)
 
+def glucose_bot():
 
-if __name__ == '__main__':
+    parser = GlucoseBotArgumentParser()
+    args = parser.parse()
     
     schedule.every(20).minutes.do(report)
     
     while True:
         schedule.run_pending()
+
+if __name__ == '__main__':
+    glucose_bot()
