@@ -11,7 +11,7 @@ class GlucoseBotArgumentParser:
             usage='glucosebot [-h] [-v]',
             epilog='For more information, visit: https://github.com/pedrooot/TFG'
         )
-        self.parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0', help='Show GlucoseBot version')
+        self.parser.add_argument('-v', '--version', action='version', help='Show GlucoseBot version')
     def error(self, message):
         print_help(message)
         exit(2)
