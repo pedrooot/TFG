@@ -46,8 +46,8 @@ def get_cgm_data(token, patient_id):
 # Main Function
 def glucose_value():
     config = load_config('config.yaml')
-    email = config['email']
-    password = config['password']
+    email = config['EMAIL']
+    password = config['PASSWORD']
 
     token = login(email, password)
     patient_data = get_patient_connections(token)

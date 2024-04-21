@@ -11,7 +11,10 @@ class GlucoseBotArgumentParser:
             usage='glucosebot [-h] [-v]',
             epilog='For more information, visit: https://github.com/pedrooot/TFG'
         )
-        self.parser.add_argument('-v', '--version', action='version', help='Show GlucoseBot version')
+        self.parser.add_argument('-v', '--version', action='store_true', help='Show GlucoseBot version')
+        self.parser.add_argument('--use_env_auth', action='store_true', help='Use environment variables for authentication')
+        self.parser.add_argument('--use_config_auth', action='store_true', help='Use configuration file for authentication')
+
     def error(self, message):
         print_help(message)
         exit(2)
@@ -19,12 +22,17 @@ class GlucoseBotArgumentParser:
     def parse(self, args=None):
         if args:
             sys.argv = args
-        
         if len(sys.argv) == 1:
             self.error("too few arguments")
-        
-        if len(sys.argv) == 2 and sys.argv[1] == '-v':
-            print(check_current_version())
-        if len(sys.argv) == 2 and sys.argv[1] == '-h':
-            print_help()
             exit(0)
+        else:
+            if len(sys.argv) == 2 and sys.argv[1] == '-v':
+                print(check_current_version())
+            if len(sys.argv) == 2 and sys.argv[1] == '-h':
+                print_help()
+                exit(0)
+        
+        args = self.parser.parse_args()
+        args.provider = "Pepe"
+        return args
+            

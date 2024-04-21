@@ -34,14 +34,14 @@ def report():
         glucose_result = glucose_result + f', ⬇️'
 
     config = load_config('config.yaml')
-    bot_send_text(config['telegram_token'], config['telegram_chat_id'], glucose_result)
+    bot_send_text(config['TELEGRAM_TOKEN'], config['TEELGRAM_CHAT_ID'], glucose_result)
 
 def glucose_bot():
-
     parser = GlucoseBotArgumentParser()
     args = parser.parse()
-    
-    schedule.every(20).minutes.do(report)
+    config = load_config('config.yaml')
+
+    schedule.every(config['INTERVAL']).minutes.do(report)
     
     while True:
         schedule.run_pending()
