@@ -21,7 +21,20 @@ def check_current_version():
         exit(1)
 
 def print_help(message=None):
+    print_banner()
     if message:
         print(message)
     print("GlucoseBot is a tool to help you manage your diabetes.")
     print("For more information, visit: https://github.com/pedrooot/TFG")
+
+
+def print_banner():
+    banner = rf""" 
+      ________.__                                  __________        __   
+     /  _____/|  |  __ __   ____  ____  ______ ____\______   \ _____/  |_ 
+    /   \  ___|  | |  |  \_/ ___\/  _ \/  ___// __ \|    |  _//  _ \   __\
+    \    \_\  \  |_|  |  /\  \__(  <_> )___ \\  ___/|    |   (  <_> )  |  
+     \______  /____/____/  \___  >____/____  >\___  >______  /\____/|__|  
+            \/                 \/          \/     \/       \/             
+    Version: {glucose_bot_version} """
+    print(banner)
