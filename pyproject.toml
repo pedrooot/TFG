@@ -9,6 +9,10 @@ readme = "README.md"
 python = "^3.11"
 pytest = "^8.1.1"
 pytest-mock = "^3.14.0"
+schedule = "^1.2.1"
+pyyaml = "^6.0.1"
+colorama = "^0.4.6"
+timedelta = "^2020.12.3"
 
 
 [build-system]

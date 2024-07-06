@@ -54,8 +54,9 @@ def glucose_value():
     
     patient_id = patient_data['data'][0]["patientId"]
     cgm_data = get_cgm_data(token, patient_id)
-    
     #Take the last glucose value
     last_glucose = cgm_data['data']['graphData'][-1]['Value']
     previous_glucose = cgm_data['data']['graphData'][-2]['Value']
-    return last_glucose, previous_glucose
+    # Take the hour of the last glucose value
+    last_hour = cgm_data['data']['graphData'][-1]['Timestamp']
+    return last_glucose, previous_glucose, last_hour
