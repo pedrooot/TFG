@@ -46,7 +46,7 @@ class Database:
             else:
                 print(err)
 
-    def create_tables(self, database_name):
+    def create_tables(self):
         try:
             if self.conn is None:
                 self.connect()
@@ -96,3 +96,59 @@ class Database:
             VALUES (%s, %s, %s)''', (nombre, idchat, token))
 
         self.conn.commit()
+
+    def add_usuario(self, nombre, token, hospital_id):
+        self.cursor.execute('''INSERT INTO Usuarios (nombre, token, hospital_id)
+            VALUES (%s, %s, %s)''', (nombre, token, hospital_id))
+
+        self.conn.commit()
+
+    def add_escaneo(self, valor_actual, valor_previo, ultimo_escaneo, usuario_id):
+        self.cursor.execute('''INSERT INTO Escaneos (valor_actual, valor_previo, ultimo_escaneo, usuario_id)
+            VALUES (%s, %s, %s, %s)''', (valor_actual, valor_previo, ultimo_escaneo, usuario_id))
+
+        self.conn.commit()
+
+    def get_hospital(self, id):
+        self.cursor.execute('SELECT * FROM Hospitales WHERE id = %s', (id,))
+        return self.cursor.fetchall()
+    
+    def get_usuario(self, id):
+        self.cursor.execute('SELECT * FROM Usuarios WHERE id = %s', (id,))
+        return self.cursor.fetchall()
+    
+    def get_escaneo(self, id):
+        self.cursor.execute('SELECT * FROM Escaneos WHERE id = %s', (id,))
+        return self.cursor.fetchall()
+    
+    def get_escaneos_usuario(self, usuario_id):
+        self.cursor.execute('SELECT * FROM Escaneos WHERE usuario_id = %s', (usuario_id,))
+        return self.cursor.fetchall()
+    
+    def get_escaneos_hospital(self, hospital_id):
+        self.cursor.execute('SELECT * FROM Escaneos WHERE usuario_id IN (SELECT id FROM Usuarios WHERE hospital_id = %s)', (hospital_id,))
+        return self.cursor.fetchall()
+    
+    def get_usuarios_hospital(self, hospital_id):
+        self.cursor.execute('SELECT * FROM Usuarios WHERE hospital_id = %s', (hospital_id,))
+        return self.cursor.fetchall()
+    
+    def get_hospital_usuario(self, usuario_id):
+        self.cursor.execute('SELECT * FROM Hospitales WHERE id IN (SELECT hospital_id FROM Usuarios WHERE id = %s)', (usuario_id,))
+        return self.cursor.fetchall()
+    
+    def get_last_escaneo_usuario(self, usuario_id):
+        self.cursor.execute('SELECT * FROM Escaneos WHERE usuario_id = %s ORDER BY ultimo_escaneo DESC LIMIT 1', (usuario_id,))
+        return self.cursor.fetchall()
+    
+    def get_last_date_escaneo_usuario(self, usuario_id):
+        self.cursor.execute('SELECT ultimo_escaneo FROM Escaneos WHERE usuario_id = %s ORDER BY ultimo_escaneo DESC LIMIT 1', (usuario_id,))
+        return self.cursor.fetchall()
+    
+    def set_token_usuario(self, usuario_id, token):
+        self.cursor.execute('UPDATE Usuarios SET token = %s WHERE id = %s', (token, usuario_id))
+        self.conn.commit()
+    
+    def get_token_usuario(self, usuario_id):
+        self.cursor.execute('SELECT token FROM Usuarios WHERE id = %s', (usuario_id,))
+        return self.cursor.fetchall()
