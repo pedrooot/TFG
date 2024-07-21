@@ -11,7 +11,7 @@ class Database:
         self.conn = None
         self.cursor = None
         self.connect()
-        self.create_tables(database_name=database)
+        self.create_tables()
 
     def connect(self):
         self.conn = mysql.connector.connect(
@@ -100,7 +100,7 @@ class Database:
 
     def add_usuario(self, nombre, token, hospital_id, min_glucosa):
         self.cursor.execute('''INSERT INTO Usuarios (nombre, token, hospital_id, min_glucosa)
-            VALUES (%s, %s, %s)''', (nombre, token, hospital_id))
+            VALUES (%s, %s, %s, %s)''', (nombre, token, hospital_id, min_glucosa))
 
         self.conn.commit()
 
