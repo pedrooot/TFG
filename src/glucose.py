@@ -1,5 +1,6 @@
+from datetime import datetime, timedelta
 import requests
-from utils.additional_funcions import load_config
+
 # Constants
 BASE_URL = "https://api-eu.libreview.io"
 HEADERS = {
@@ -44,19 +45,28 @@ def get_cgm_data(token, patient_id):
     return response.json()
 
 # Main Function
-def glucose_value():
-    config = load_config('config.yaml')
-    email = config['EMAIL']
-    password = config['PASSWORD']
+def glucose_value(user_id, database):
+    # Get the last scan of the user
+    last_scan = database.get_last_escaneo_usuario(user_id)
+    # Get the datetime of the last scan knowing
+    last_scan_datetime = last_scan['ultimo_escaneo']
+    if last_scan_datetime is not None and last_scan_datetime > datetime.now() - timedelta(minutes=30):
+            return last_scan["valor_actual"], last_scan["valor_previo"], last_scan_datetime
+    else:
+        # Get the user data
+        user = database.get_usuario(user_id)
+        email = user['email']
+        password = user['password']
 
-    token = login(email, password)
-    patient_data = get_patient_connections(token)
-    
-    patient_id = patient_data['data'][0]["patientId"]
-    cgm_data = get_cgm_data(token, patient_id)
-    #Take the last glucose value
-    last_glucose = cgm_data['data']['graphData'][-1]['Value']
-    previous_glucose = cgm_data['data']['graphData'][-2]['Value']
-    # Take the hour of the last glucose value
-    last_hour = cgm_data['data']['graphData'][-1]['Timestamp']
-    return last_glucose, previous_glucose, last_hour
+        token = login(email, password)
+        patient_data = get_patient_connections(token)
+        
+        patient_id = patient_data['data'][0]["patientId"]
+        cgm_data = get_cgm_data(token, patient_id)
+        #Take the last glucose value
+        last_glucose = cgm_data['data']['graphData'][-1]['Value']
+        previous_glucose = cgm_data['data']['graphData'][-2]['Value']
+        # Take the hour of the last glucose value
+        last_hour = cgm_data['data']['graphData'][-1]['Timestamp']
+        database.add_escaneo(last_glucose, previous_glucose, last_hour, user_id)
+        return last_glucose, previous_glucose, last_hour

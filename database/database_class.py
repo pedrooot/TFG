@@ -65,6 +65,7 @@ class Database:
                 nombre VARCHAR(255) NOT NULL,
                 token VARCHAR(255) NOT NULL,
                 hospital_id INT,
+                min_glucosa INT,
                 FOREIGN KEY (hospital_id) REFERENCES Hospitales(id)
             );''')
 
@@ -97,8 +98,8 @@ class Database:
 
         self.conn.commit()
 
-    def add_usuario(self, nombre, token, hospital_id):
-        self.cursor.execute('''INSERT INTO Usuarios (nombre, token, hospital_id)
+    def add_usuario(self, nombre, token, hospital_id, min_glucosa):
+        self.cursor.execute('''INSERT INTO Usuarios (nombre, token, hospital_id, min_glucosa)
             VALUES (%s, %s, %s)''', (nombre, token, hospital_id))
 
         self.conn.commit()
@@ -115,6 +116,10 @@ class Database:
     
     def get_usuario(self, id):
         self.cursor.execute('SELECT * FROM Usuarios WHERE id = %s', (id,))
+        return self.cursor.fetchall()
+
+    def get_all_usuarios(self):
+        self.cursor.execute('SELECT * FROM Usuarios')
         return self.cursor.fetchall()
     
     def get_escaneo(self, id):
