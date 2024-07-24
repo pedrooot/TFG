@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <h2>Register User</h2>
+    <form method="post" action="/register_user">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        <label for="telegram_token">Telegram Token:</label>
+        <input type="text" id="telegram_token" name="telegram_token" required><br>
+        <label for="telegram_chat_id">Telegram Chat ID:</label>
+        <input type="text" id="telegram_chat_id" name="telegram_chat_id" required><br>
+        <label for="hospital_id">Hospital ID:</label>
+        <input type="text" id="hospital_id" name="hospital_id" required><br>
+        <label for="min_glucosa">Min Glucosa:</label>
+        <input type="text" id="min_glucosa" name="min_glucosa" required><br>
+        <button type="submit">Register User</button>
+    </form>
+    <h2>Register Hospital</h2>
+    <form method="post" action="/register_hospital">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br>
+        <label for="idchat">Telegram Chat ID:</label>
+        <input type="text" id="idchat" name="idchat" required><br>
+        <label for="token">Telegram Token:</label>
+        <input type="text" id="token" name="token" required><br>
+        <button type="submit">Register Hospital</button>
+    </form>
+    <a href="/">Back to Login</a>
+</body>
+</html>
