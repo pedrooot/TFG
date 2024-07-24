@@ -63,7 +63,9 @@ class Database:
             self.cursor.execute('''CREATE TABLE Usuarios (
                 id INT PRIMARY KEY AUTO_INCREMENT,
                 nombre VARCHAR(255) NOT NULL,
-                token VARCHAR(255) NOT NULL,
+                password VARCHAR(255) NOT NULL,
+                telegram_token VARCHAR(255) NOT NULL,
+                telegram_chat_id VARCHAR(255) NOT NULL,
                 hospital_id INT,
                 min_glucosa INT,
                 FOREIGN KEY (hospital_id) REFERENCES Hospitales(id)
@@ -98,9 +100,9 @@ class Database:
 
         self.conn.commit()
 
-    def add_usuario(self, nombre, token, hospital_id, min_glucosa):
-        self.cursor.execute('''INSERT INTO Usuarios (nombre, token, hospital_id, min_glucosa)
-            VALUES (%s, %s, %s, %s)''', (nombre, token, hospital_id, min_glucosa))
+    def add_usuario(self, nombre, password, telegram_token, telegram_chat_id, hospital_id, min_glucosa):
+        self.cursor.execute('''INSERT INTO Usuarios (nombre, password, token, hospital_id, min_glucosa)
+            VALUES (%s, %s, %s, %s, %s, %s)''', (nombre, password, telegram_token, telegram_chat_id, hospital_id, min_glucosa))
 
         self.conn.commit()
 
