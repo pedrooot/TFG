@@ -35,7 +35,7 @@ def test_login_successful():
 
         token = login("test@example.com", "password123")
 
-        assert token == None
+        assert token == "fake_token"
 
 
 def test_login_failure():

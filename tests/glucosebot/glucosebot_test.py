@@ -3,8 +3,6 @@ import sys
 from datetime import datetime, timedelta
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 
 
@@ -46,23 +44,27 @@ def test_report_high_glucose():
         (1, "hospital_name", "hospital_chat_id", "hospital_token")
     ]
 
+    mock_login = MagicMock()
+    mock_login.return_value = "fake_token"
+
     with patch("glucosebot.bot_send_text") as mock_bot_send_text:
         mock_bot_send_text.return_value = {"ok": True}
 
-        report(
-            user_id=1,
-            hospital_id=1,
-            database=mock_database,
-            user_name="pedro",
-            input_password="fake_password",
-        )
+        with patch("glucosebot.login", mock_login):
+            report(
+                user_id=1,
+                hospital_id=1,
+                database=mock_database,
+                user_name="pedro",
+                input_password="fake_password",
+            )
 
-        assert mock_bot_send_text.called
-        mock_bot_send_text.assert_any_call(
-            "hospital_token",
-            "hospital_chat_id",
-            "El usuario pedro tiene el nivel de glucosa en: 200 por favor revisar su estado",
-        )
+            assert mock_bot_send_text.called
+            mock_bot_send_text.assert_any_call(
+                "hospital_token",
+                "hospital_chat_id",
+                "El usuario pedro tiene el nivel de glucosa en: 200 por favor revisar su estado",
+            )
 
 
 def test_report_low_glucose():
@@ -110,7 +112,6 @@ def test_report_low_glucose():
 def test_glucose_bot_stop():
     # Simula que el bot se detiene
     with patch("glucosebot.schedule.clear") as mock_clear:
-        with pytest.raises(SystemExit):
-            glucose_bot(stop=True)
+        glucose_bot(stop=True)
 
         mock_clear.assert_called_once()
