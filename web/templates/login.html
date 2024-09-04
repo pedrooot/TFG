@@ -4,11 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            text-align: center;
+            color: #8a0a03;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <div class="row justify-content-center mt-5">
+            <div class="col-md-12 text-center ascii-art">
+  ________.__                                  __________        __
+ /  _____/|  |  __ __   ____  ____  ______ ____\______   \ _____/  |_
+/   \  ___|  | |  |  \_/ ___\/  _ \/  ___// __ \|    |  _//  _ \   __\
+\    \_\  \  |_|  |  /\  \__(  <_> )___ \\  ___/|    |   (  <_> )  |
+ \______  /____/____/  \___  >____/____  >\___  >______  /\____/|__|
+        \/                 \/          \/     \/       \/
+Version: v1.0.0
+            </div>
             <div class="col-md-6">
                 <h1 class="text-center">Login</h1>
                 <form method="post" action="/login" class="mt-4">
