@@ -31,7 +31,9 @@ def get_secret(secret_name):
 
 # Obtener las credenciales de la base de datos desde Secrets Manager
 
-secret = get_secret(os.environ["SECRET_NAME"])
+secret = get_secret(os.environ["SECRET_NAME_DATABASE"])
+
+secre_custom = get_secret(os.environ["SECRET_NAME_CUSTOM"])
 
 db_host = os.environ["DB_HOST"]
 db_name = os.environ["DB_NAME"]
