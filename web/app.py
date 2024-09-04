@@ -30,12 +30,13 @@ def get_secret(secret_name):
 
 
 # Obtener las credenciales de la base de datos desde Secrets Manager
-secret = get_secret("my_database_secrets")
 
-db_host = secret["DB_HOST"]
-db_name = secret["DB_NAME"]
-db_user = secret["DB_USER"]
-db_pass = secret["DB_PASS"]
+secret = get_secret(os.environ["SECRET_NAME"])
+
+db_host = os.environ["DB_HOST"]
+db_name = os.environ["DB_NAME"]
+db_user = secret["username"]
+db_pass = secret["password"]
 
 app.secret_key = os.urandom(24)
 
