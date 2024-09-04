@@ -5,7 +5,7 @@ import sys
 
 import bcrypt
 import boto3
-from botocore.exceptions import NoCredentialsError, PartialCredentialsError
+from botocore.exceptions import ClientError
 from flask import Flask, redirect, render_template, request, session, url_for
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -17,16 +17,21 @@ app = Flask(__name__)
 
 
 def get_secret(secret_name):
-    """Función para obtener secretos desde AWS Secrets Manager"""
-    client = boto3.client("secretsmanager")
+    region_name = "us-east-1"
+
+    # Create a Secrets Manager client
+    session = boto3.session.Session()
+    client = session.client(service_name="secretsmanager", region_name=region_name)
 
     try:
         get_secret_value_response = client.get_secret_value(SecretId=secret_name)
-        secret = get_secret_value_response["SecretString"]
-        return json.loads(secret)
-    except (NoCredentialsError, PartialCredentialsError):
-        print("Credenciales no disponibles.")
-        return None
+    except ClientError as e:
+        # For a list of exceptions thrown, see
+        # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+        raise e
+
+    secret = get_secret_value_response["SecretString"]
+    return json.loads(secret)
 
 
 # Obtener las credenciales de la base de datos desde Secrets Manager
