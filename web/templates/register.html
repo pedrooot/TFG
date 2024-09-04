@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            text-align: center;
+            color: #8a0a03;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-11 text-center ascii-art">
+            ________.__                                  __________        __
+           /  _____/|  |  __ __   ____  ____  ______ ____\______   \ _____/  |_
+          /   \  ___|  | |  |  \_/ ___\/  _ \/  ___// __ \|    |  _//  _ \   __\
+          \    \_\  \  |_|  |  /\  \__(  <_> )___ \\  ___/|    |   (  <_> )  |
+           \______  /____/____/  \___  >____/____  >\___  >______  /\____/|__|
+                  \/                 \/          \/     \/       \/
+          Version: v1.0.0
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <h1 class="text-center">Register</h1>
+                <h2 class="mt-4">Register User</h2>
+                <form method="post" action="/register_user" class="mt-3">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telegram_token">Telegram Token:</label>
+                        <input type="text" class="form-control" id="telegram_token" name="telegram_token" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telegram_chat_id">Telegram Chat ID:</label>
+                        <input type="text" class="form-control" id="telegram_chat_id" name="telegram_chat_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hospital_id">Hospital ID:</label>
+                        <input type="text" class="form-control" id="hospital_id" name="hospital_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="min_glucosa">Min Glucosa:</label>
+                        <input type="text" class="form-control" id="min_glucosa" name="min_glucosa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="max_glucosa">Max Glucosa:</label>
+                        <input type="text" class="form-control" id="max_glucosa" name="max_glucosa" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="max_glucosa">Tiempo de Notificacion (Minutos)</label>
+                        <input type="text" class="form-control" id="notificacion_tiempo" name="notificacion_tiempo" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register User</button>
+                </form>
+                <h2 class="mt-5">Register Hospital</h2>
+                <form method="post" action="/register_hospital" class="mt-3">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="idchat">Telegram Chat ID:</label>
+                        <input type="text" class="form-control" id="idchat" name="idchat" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="token">Telegram Token:</label>
+                        <input type="text" class="form-control" id="token" name="token" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register Hospital</button>
+                </form>
+                <div class="text-center mt-3">
+                    <a href="/">Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

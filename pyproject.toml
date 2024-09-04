@@ -13,6 +13,7 @@ schedule = "^1.2.1"
 pyyaml = "^6.0.1"
 colorama = "^0.4.6"
 timedelta = "^2020.12.3"
+flask = "^3.0.3"
 
 
 [build-system]
