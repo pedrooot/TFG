@@ -117,12 +117,6 @@ def report(user_id, hospital_id, database, user_name, input_password):
                 time.sleep(10)
 
 
-## User db: pedro
-## Password: pedrotfg-1111P
-## Database host: localhost
-## Database name: glucosebot
-
-
 def glucose_bot(
     database=None, user_id=None, input_username=None, input_password=None, stop=False
 ):
