@@ -40,8 +40,8 @@ secret = get_secret(os.environ["SECRET_NAME_DATABASE"])
 
 secre_custom = get_secret(os.environ["SECRET_NAME_CUSTOM"])
 
-db_host = os.environ["DB_HOST"]
-db_name = os.environ["DB_NAME"]
+db_host = secre_custom["DB_HOST"]
+db_name = secre_custom["DB_NAME"]
 db_user = secret["username"]
 db_pass = secret["password"]
 
