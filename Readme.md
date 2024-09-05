@@ -12,3 +12,5 @@ Cuando ejecutes la aplicación:
 `python3 application.py`
 
 Se abrirá el portal de acceso a GlucoseBot.
+
+Este proyecto está hecho para hostearse en el servicio EC2 de AWS y a su vez hace uso de servicios como RDS para la base de datos, VPC para la red y Secrets Manager para la gestión de las credenciales por lo que ejecutar este proyecto localmente requiere de severas modificaciones en el código.
