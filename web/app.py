@@ -203,7 +203,6 @@ def register_hospital():
 @app.route("/start_bot", methods=["POST"])
 def start_bot():
     print("Starting bot")
-    print(session["bot_running"])
     if not session.get("bot_running", False):
         database = get_db_connection()
         input_password = request.form["bot_password"]
