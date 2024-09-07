@@ -136,8 +136,8 @@ def glucose_bot(
     print_banner()
     current_user = database.get_usuario(user_id)
     hospital_id = current_user[0][5]
-    current_user[0][8]
-    schedule.every(0.1).minutes.do(
+    tiempo = current_user[0][8]
+    schedule.every(tiempo).minutes.do(
         lambda: report(
             user_id=user_id,
             hospital_id=hospital_id,
